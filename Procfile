@@ -1,1 +1,1 @@
-web: gunicorn fastApiDeploy:app
+  web: uvicorn main:app
