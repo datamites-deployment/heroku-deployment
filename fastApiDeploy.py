@@ -18,7 +18,7 @@ class Parameters(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return "Hello world"
 
 
 @app.post("/house_pred")
