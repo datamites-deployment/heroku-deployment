@@ -1,1 +1,1 @@
-  web: uvicorn fastApiDeploy:app
+  web: uvicorn fastApiDeploy:app  --host=0.0.0.0 --port=${PORT:-5000}
