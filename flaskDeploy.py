@@ -5,15 +5,16 @@ from marshmallow import Schema, fields, ValidationError
 
 
 app = Flask(__name__)
-model = joblib.load('model.sav')
+model = joblib.load('hp_trained_model.pkl')
+
+
 
 class ParameterSchema(Schema):
-    location = fields.Integer(required=True)
+    sqft = fields.Integer(required=True)
+    place = fields.Integer(required=True)
+    yearsOld = fields.Integer(required=True)
+    totalFloor = fields.Integer(required=True)
     bhk = fields.Integer(required=True)
-    furnishing = fields.Integer(required=True)
-    area = fields.Integer(required=True)
-    old = fields.Integer(required=True)
-    floor = fields.Integer(required=True)
 
 
 @app.route('/')
@@ -36,24 +37,23 @@ def predict():
         # Return a nice message if validation fails
         return jsonify(err.messages), 400
 
+
     # Convert request body back to JSON str
-    location = reqParam['location']
+    area_sqft = reqParam['sqft']
+    place = reqParam['place']
+    yearsOld = reqParam['yearsOld']
+    totalFloor = reqParam['totalFloor']
     bhk = reqParam['bhk']
-    furnishing = reqParam['furnishing']
-    area = reqParam['area']
-    old = reqParam['old']
-    floor = reqParam['floor']
     
     returnJson = {}
     # predicting from model
     returnJson['price'] = model.predict(
         [[
-            location,
+            area_sqft,
+            place,
+            yearsOld,
+            totalFloor,
             bhk,
-            furnishing,
-            area,
-            old,
-            floor,
         ]]
     )[0]
     
