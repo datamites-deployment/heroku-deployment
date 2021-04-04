@@ -19,7 +19,7 @@ class ParameterSchema(Schema):
 
 @app.route('/')
 def index():
-    return 'Hello world'
+    return 'Hello Data Scientists'
 
  
 
