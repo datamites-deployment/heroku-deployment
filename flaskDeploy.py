@@ -5,7 +5,7 @@ from marshmallow import Schema, fields, ValidationError
 
 
 app = Flask(__name__)
-model = joblib.load('hp_trained_model.pkl')
+model = joblib.load('hp_trained_model.sav')
 
 
 
